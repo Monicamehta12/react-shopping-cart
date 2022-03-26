@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../navbar/Navbar'
+import Navbar from '../components/navbar/Navbar'
 import { Route, Navigate, Routes } from "react-router-dom"
-import routes from '../../routes';
+import routes from '../routes';
 
 const Home = () => {
     const getRoutes = (routes) => {
@@ -22,16 +22,17 @@ const Home = () => {
 
     return (
         <>
-            <Navbar />
-            <div className='container my-5 h-100 overflow-auto'>
-                <div className="row justify-content-center align-items-center">
-                    <Routes>
-                        {getRoutes(routes)}
-                        <Route path="*" element={<Navigate to="/auth/login" />} />
-                    </Routes>
+            <div className='h-100'>
+                <Navbar />
+                <div className='container overflow-auto'>
+                    <div className="row justify-content-center align-items-center">
+                        <Routes>
+                            {getRoutes(routes)}
+                            <Route path="*" element={<Navigate to="/auth/login" />} />
+                        </Routes>
+                    </div>
                 </div>
             </div>
-
         </>
     )
 }

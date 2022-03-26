@@ -18,7 +18,7 @@ const Login = () => {
     else {
       setLoggedIn(true)
       if (loggedIn === true) {
-        navigate("/dashboard")
+        navigate("/products")
       }
     }
   }, [loggedIn, navigate])

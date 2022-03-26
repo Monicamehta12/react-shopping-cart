@@ -7,9 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const users = useSelector((state) => state.users)
-
-  console.log("users", users)
+  const users = useSelector((state) => state.users.users)
 
   const initialValues = {
     name: '',
@@ -18,8 +16,6 @@ const Register = () => {
     confirmPassword: ''
   }
 
-  // const registeredUser = users.filter((data) => data.email === userData.email)
-
   const [userData, setUserData] = useState(initialValues)
 
   const onInputChange = (event) => {
@@ -27,24 +23,28 @@ const Register = () => {
     setUserData({ ...userData, [name]: value });
   };
 
+  console.log("users", users)
+  const registeredUser = users.filter((item) => item.email === userData.email)
+  console.log("registereduser", registeredUser)
+
   const onSubmit = (e) => {
     e.preventDefault()
     console.log(userData)
-    
+    if(!registeredUser || registeredUser.length === 0){
       if (userData.password.length > 7 || userData.confirmPassword.length > 7) {
         if (userData.password === userData.confirmPassword) {
           dispatch(registerUser(userData))
           successToaster("User registration successful")
           navigate("/auth/login")
-        }
-        else {
+        }else {
           errorToaster("Confirm Password should match Password")
         }
-      }
-      else {
+      }else {
         errorToaster("Password Length must be atleast 8 Character !")
       }
-    
+    }else{
+      errorToaster("Email already registered!")
+    }
   }
 
 
@@ -100,7 +100,6 @@ const Register = () => {
         </div>
       </div>
     </div>
-
   )
 }
 

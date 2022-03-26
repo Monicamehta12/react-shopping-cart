@@ -3,15 +3,15 @@ import './App.css'
 import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store/store'
 import { PersistGate } from "redux-persist/integration/react";
-import { BrowserRouter, Route, Navigate, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
-import Home from './components/home/Home'
-import Product from "./components/product/Product";
+import Home from './layouts/Home'
+import Product from "./layouts/Product";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Dashboard from "./components/dashboard/Dashboard";
-import Logout from "./components/logout/Logout";
+import Dashboard from "./views/dashboard/Dashboard";
+import Logout from "./views/logout/Logout";
 
 function App() {
   return (
@@ -21,11 +21,10 @@ function App() {
           <BrowserRouter>
             <ToastContainer />
             <Routes>
-              <Route exact path="*" element={<Home />}></Route>
-              <Route exact path="/dashboard" element={<Dashboard/>}></Route>
-              <Route exact path="/products" element={<Product />}></Route>
-              <Route exact path="/logout" element={<Logout />}></Route>
-              {/* <Route path="*" element={<Navigate to="/" />} /> */}
+              <Route path="*" element={<Home />}></Route>
+              <Route path="/dashboard" element={<Dashboard />}></Route>
+              <Route path="/products/*" element={<Product />}></Route>
+              <Route path="/logout" element={<Logout />}></Route>
             </Routes>
           </BrowserRouter>
         </PersistGate>
